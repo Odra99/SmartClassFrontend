@@ -1,0 +1,43 @@
+<div class="d-flex ">
+  <app-navbar></app-navbar>
+  <div class="container-fluid h-100">
+    <div class="row h-100 w-100 mt-5 ">
+      <div class=" col-12 d-flex justify-content-center">
+        <h1>Areas</h1>
+      </div>
+      <div class=" col-6  h-100 p-4 p-lg-5">
+        <div class="d-flex flex-column row-gap-3 ">
+          <div *ngFor="let area of areas" (click)="selectArea(area)" class="bg-body-secondary card border-light">
+            <div class="d-flex card-body align-items-center column-gap-3 shadow-sm">
+              <app-icon [size]="30">category</app-icon>
+              <span>{{area.name}}</span>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class=" col-6  p-4 p-lg-5 d-flex flex-grow-1 ">
+        <div *ngIf="!selectedArea" class="d-flex bg-body-secondary  align-items-center justify-content-center w-100 shadow-sm rounded">
+          <span>Seleccione un area</span>
+        </div>
+        <div *ngIf="selectedArea" class="d-flex bg-body-secondary  align-items-center justify-content-center w-100 shadow-sm rounded">
+          <div class="bg-white w-75 h-75 d-flex  flex-column p-3 justify-content-center shadow-sm rounded">
+            <h5 class="fw-bold">Editar Area</h5 >
+            <div class="d-flex flex-column">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="area_name" placeholder="Area comun" [(ngModel)]="selectedArea.name">
+                <label for="area_name">Nombre del area</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input [(colorPicker)]="selectedArea.color" [style.background]="selectedArea.color" class="form-control" id="area_color">
+                <label for="area_color">Color</label>
+              </div>
+            </div>
+            <button class="btn btn-primary" (click)="save()">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

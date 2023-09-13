@@ -1,31 +1,43 @@
-<div *transloco="let t" class="sidebar border-end ">
-    <div class="profile-info">
-  
+<div  class="sidebar border-end ">
+    <div class="profile-info">  
     </div>
     <div class="menu-items">
-      <a class="menu-item text-decoration-none" *ngFor="let item of menuItems" routerLink="{{item.sref}}"
-        routerLinkActive="active">
-        <div class="bg-white  rounded d-flex justify-content-start align-items-start text-gray-200">
-          <app-material-icon [size]="30">{{item.icon}}</app-material-icon>
-        </div>
-        <p class="h6 fw-semibold text-gray-200">{{t(item.name)}}</p>
-  
-      </a>
       <hr class="w-100 px-3 ">
-      <a class="menu-item text-decoration-none " routerLink="/help" routerLinkActive="active">
-        <div class="bg-white rounded d-flex justify-content-start align-items-start text-gray-200 ">
-          <app-material-icon [size]="30">help</app-material-icon>
+      <a class="menu-item text-decoration-none " routerLink="/schedule" routerLinkActive="active">
+        <div class=" rounded d-flex justify-content-start align-items-start  ">
+          <app-icon [size]="30">calendar_view_month</app-icon>
         </div>
-        <p class="h6 fw-semibold text-gray-200">{{t('help')}}</p>
+        <p class="h6 fw-semibold ">Horario</p>
       </a>
-      <a class="menu-item text-decoration-none" (click)="logout()">
-        <div class="bg-white  rounded d-flex justify-content-start align-items-start text-gray-200">
-          <app-material-icon [size]="30">logout</app-material-icon>
+      <a class="menu-item text-decoration-none " routerLink="/classes" routerLinkActive="active">
+        <div class=" rounded d-flex justify-content-start align-items-start  ">
+          <app-icon [size]="30">school</app-icon>
         </div>
-        <p class="h6 fw-semibold text-gray-200">{{t('logout')}}</p>
+        <p class="h6 fw-semibold ">Clases</p>
       </a>
-    </div>
-    <div class="options">
-  
+      <a class="menu-item text-decoration-none " routerLink="/teachers" routerLinkActive="active">
+        <div class=" rounded d-flex justify-content-start align-items-start  ">
+          <app-icon [size]="30">work_history</app-icon>
+        </div>
+        <p class="h6 fw-semibold ">Profesores</p>
+      </a>
+      <a class="menu-item text-decoration-none " routerLink="/courses" routerLinkActive="active">
+        <div class=" rounded d-flex justify-content-start align-items-start  ">
+          <app-icon [size]="30">book</app-icon>
+        </div>
+        <p class="h6 fw-semibold ">Cursos</p>
+      </a>
+      <a class="menu-item text-decoration-none " routerLink="/areas" routerLinkActive="active">
+        <div class=" rounded d-flex justify-content-start align-items-start  ">
+          <app-icon [size]="30">category</app-icon>
+        </div>
+        <p class="h6 fw-semibold ">Areas</p>
+      </a>      
+      <a class="menu-item text-decoration-none " routerLink="/statistics" routerLinkActive="active">
+        <div class=" rounded d-flex justify-content-start align-items-start  ">
+          <app-icon [size]="30">bar_chart</app-icon>
+        </div>
+        <p class="h6 fw-semibold ">Estadisticas</p>
+      </a>      
     </div>
   </div>

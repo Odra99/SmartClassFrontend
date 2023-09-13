@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+$primary: #d1f0b1;
+/* Importing Bootstrap SCSS file. */
+@import "bootstrap/scss/bootstrap";
+
+.container-fluid {
+  margin-left: 6rem !important;
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+}

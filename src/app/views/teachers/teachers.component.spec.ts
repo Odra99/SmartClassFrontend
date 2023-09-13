@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoadFilesComponent } from './load-files.component';
+import { TeachersComponent } from './teachers.component';
 
-describe('LoadFilesComponent', () => {
-  let component: LoadFilesComponent;
-  let fixture: ComponentFixture<LoadFilesComponent>;
+describe('TeachersComponent', () => {
+  let component: TeachersComponent;
+  let fixture: ComponentFixture<TeachersComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LoadFilesComponent]
+      declarations: [TeachersComponent]
     });
-    fixture = TestBed.createComponent(LoadFilesComponent);
+    fixture = TestBed.createComponent(TeachersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
