@@ -1,3 +1,5 @@
+import { Area } from "./area";
+
 export class Teacher{
     public id !: number;
     public name !:string;
@@ -10,4 +12,5 @@ export class TeacherSchedule{
     public start_time!:string;
     public end_time!:string;
     public teacher!:Teacher;
+    public area!:Area;
 }

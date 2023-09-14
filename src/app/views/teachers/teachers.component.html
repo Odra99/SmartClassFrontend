@@ -1,1 +1,81 @@
-<p>teachers works!</p>
+<div class="d-flex ">
+    <app-navbar></app-navbar>
+    <div class="container-fluid h-100">
+        <div class="row h-100 w-100 mt-5 ">
+            <div class=" col-12 d-flex justify-content-center">
+                <h1>Profesores</h1>
+            </div>
+            <div class=" col-6 h-75 p-4 p-lg-5  ">
+                <div class="d-flex flex-column row-gap-3 overflow-y-scroll teachers-list">
+                    <div *ngFor="let teacher of teachers" (click)="selectTeacher(teacher)"
+                        class="bg-body-secondary card border-light">
+                        <div class="d-flex card-body align-items-center column-gap-3 shadow-sm">
+                            <app-icon [size]="30">work_history</app-icon>
+                            <span>{{teacher.name}}</span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-6  p-4 p-lg-5 d-flex flex-grow-1 ">
+                <div *ngIf="!selectedTeacher"
+                    class="d-flex bg-body-secondary  align-items-center justify-content-center w-100 shadow-sm rounded">
+                    <span>Seleccione un profesor</span>
+                </div>
+                <div *ngIf="selectedTeacher"
+                    class="d-flex bg-body-secondary  align-items-center justify-content-center w-100 shadow-sm rounded">
+                    <div class="bg-white w-75 h-75 d-flex  flex-column p-3 justify-content-center shadow-sm rounded">
+                        <h5 class="fw-bold">Datos del Profesor</h5>
+                        <div class="d-flex flex-column">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="area_name" placeholder="Area comun"
+                                    [(ngModel)]="selectedTeacher.name">
+                                <label for="area_name">Nombre del profesor</label>
+                            </div>
+                            <div>
+                                <table class="table caption-top">
+                                    <caption>Horario de trabajo</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Inicio</th>
+                                            <th scope="col">Fin</th>
+                                            <th scope="col">Area</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of selectedTeacher.teacher_schedule; index as i">
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{item.start_time}}</td>
+                                            <td>{{item.end_time}}</td>
+                                            <td>{{item.area.name}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div>
+                                <table class="table caption-top">
+                                    <caption>Cursos</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Curso</th>
+                                            <th scope="col">Area</th>
+                                            <th scope="col">Titular</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                       
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
