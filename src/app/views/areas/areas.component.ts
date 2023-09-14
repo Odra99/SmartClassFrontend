@@ -1,34 +1,49 @@
 import { Component, OnInit } from '@angular/core';
 import { Area } from 'src/app/data/area';
 import { AreaService } from 'src/app/services/areas.service';
+import { ToasterService } from 'src/app/services/others/toaster.service';
+import { ToasterEnum } from 'src/global/toaster-enum';
 
 @Component({
   selector: 'app-areas',
   templateUrl: './areas.component.html',
   styleUrls: ['./areas.component.scss']
 })
-export class AreasComponent implements OnInit{
+export class AreasComponent implements OnInit {
 
-  areas!:Area[];
+  areas!: Area[];
 
-  selectedArea!:Area;
+  selectedArea!: Area;
 
-  constructor(private areaService:AreaService){
+  constructor(private areaService: AreaService,
+    private toast: ToasterService) {
 
   }
 
   ngOnInit(): void {
+    this.getInfo();
+  }
+
+  getInfo() {
     this.areaService.listAll().subscribe({
-      next:(value) =>{
+      next: (value) => {
         this.areas = value.body;
       },
     })
   }
 
-  selectArea(area:any): void{
+  selectArea(area: any): void {
     this.selectedArea = area;
   }
 
-  save(){
+  save() {
+    this.areaService.save(this.selectedArea).subscribe({
+      next: () => {
+        this.toast.show({ message: 'Cambios guardados', type: ToasterEnum.SUCCESS })
+        this.getInfo()
+      }, error: () => {
+        this.toast.show({ message: 'Error', type: ToasterEnum.ERROR })
+      },
+    })
   }
 }

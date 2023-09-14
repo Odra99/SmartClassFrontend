@@ -24,13 +24,13 @@ export class ToasterService {
   private getToastConfig(type: ToasterEnum): { borderClass: string, textClass: string, header: string } {
     switch (type) {
       case ToasterEnum.INFO:
-        return { borderClass: 'border-primary', textClass: 'text-primary', header: 'information' };
+        return { borderClass: 'border-primary', textClass: 'text-primary', header: 'Informacion' };
       case ToasterEnum.SUCCESS:
-        return { borderClass: 'border-success', textClass: 'text-success', header: 'success' };
+        return { borderClass: 'border-success', textClass: 'text-success', header: 'Exito' };
       case ToasterEnum.ERROR:
-        return { borderClass: 'border-danger', textClass: 'text-danger', header: 'error' };
+        return { borderClass: 'border-danger', textClass: 'text-danger', header: 'Error' };
       case ToasterEnum.WARNING:
-        return { borderClass: 'border-warning', textClass: 'text-warning', header: 'warning' };
+        return { borderClass: 'border-warning', textClass: 'text-warning', header: 'Advertencia' };
     }
 
     return { borderClass: '', textClass: '', header: '' };
