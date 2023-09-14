@@ -1,1 +1,84 @@
-<p>classes works!</p>
+<div class="d-flex ">
+    <app-navbar></app-navbar>
+    <div class="container-fluid h-100">
+        <div class="row h-100 w-100 mt-5 ">
+            <div class=" col-12 d-flex justify-content-center">
+                <h1>Clases</h1>
+            </div>
+            <div class=" col-6 h-75 p-4 p-lg-5  ">
+                <div class="d-flex flex-column row-gap-3 overflow-y-scroll teachers-list">
+                    <div *ngFor="let classroom of classrooms" (click)="selectClassroom(classroom)"
+                        class="bg-body-secondary card border-light">
+                        <div class="d-flex card-body align-items-center column-gap-3 shadow-sm">
+                            <app-icon [size]="30">school</app-icon>
+                            <span>{{classroom.name}}</span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-6  p-4 p-lg-5 d-flex flex-grow-1 ">
+                <div *ngIf="!selectedClassroom"
+                    class="d-flex bg-body-secondary  align-items-center justify-content-center w-100 shadow-sm rounded">
+                    <span>Seleccione una clase</span>
+                </div>
+                <div *ngIf="selectedClassroom"
+                    class="d-flex bg-body-secondary  align-items-center justify-content-center w-100 shadow-sm rounded">
+                    <div class="bg-white w-75 h-75 d-flex  flex-column p-3 justify-content-center shadow-sm rounded">
+                        <h5 class="fw-bold">Datos de la Clase</h5>
+                        <div class="d-flex flex-column">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="area_name" placeholder="Area comun"
+                                    [(ngModel)]="selectedClassroom.name" readonly="true">
+                                <label for="area_name">Nombre de la clase</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="space_capacity" placeholder="Area comun"
+                                    [(ngModel)]="selectedClassroom.space_capacity" readonly="true">
+                                <label for="space_capacity">Capacidad</label>
+                            </div>
+                            <div>
+                                <table class="table caption-top">
+                                    <caption>Horario</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Inicio</th>
+                                            <th scope="col">Fin</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of selectedClassroom.class_schedule; index as i">
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{item.start_time}}</td>
+                                            <td>{{item.end_time}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div>
+                                <table class="table caption-top">
+                                    <caption>Cursos</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Curso</th>
+                                            <th scope="col">Area</th>
+                                            <th scope="col">Titular</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                       
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
