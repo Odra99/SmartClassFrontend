@@ -11,6 +11,6 @@ export class ClassroomSchedule{
     public id !:number;
     public start_time!:string;
     public end_time!:string;
-    public teacher!:Classroom;
+    public class!:Classroom;
     public area!:Area;
 }

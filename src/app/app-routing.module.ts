@@ -4,12 +4,14 @@ import { ScheduleDashboardComponent } from './views/schedule-dashboard/schedule-
 import { AreasComponent } from './views/areas/areas.component';
 import { TeachersComponent } from './views/teachers/teachers.component';
 import { ClassesComponent } from './views/classes/classes.component';
+import { CoursesComponent } from './views/courses/courses.component';
 
 const routes: Routes = [
   { path: '', component: ScheduleDashboardComponent },
   { path: 'areas', component: AreasComponent },
   { path: 'teachers', component: TeachersComponent },
-  { path: 'classes', component: ClassesComponent }
+  { path: 'classes', component: ClassesComponent },
+  { path: 'courses', component: CoursesComponent }
 ];
 
 @NgModule({
