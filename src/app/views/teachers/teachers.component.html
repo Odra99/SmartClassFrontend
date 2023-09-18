@@ -83,8 +83,12 @@
             </ng-container>
            <ng-container *ngIf="showConfig">
 
-            <div class="p-3" >
-                <button class="btn btn-primary" (click)="saveTeacher()"><app-icon>settings</app-icon> Guardar Configuracion</button>
+            <div class="d-flex justify-content-start">
+                <div class="p-3 " >
+                    <button class="btn btn-primary" (click)="saveTeacher()"><app-icon>settings</app-icon> Guardar Configuracion</button>
+                </div> <div class="p-3" >
+                    <button class="btn btn-primary" (click)="selectAll()"><app-icon>settings</app-icon> Seleccionar Todos</button>
+                </div>
             </div>
             <div class="col-12">
                 <div cdkDropListGroup>

@@ -34,7 +34,19 @@ export class PrioritiesComponent implements OnInit {
   }
 
   getInfo() {
-    if (!this.courses) {
+    if(this.showConfig){
+
+      if(this.courses){
+
+        this.selectedCourses = [...this.courses];
+        }
+      this.priorityService.listAll().subscribe({
+        next: (value) => {
+          this.courses = value.body;
+        },
+      })
+
+    }else if (!this.courses) {
       this.priorityService.listAll().subscribe({
         next: (value) => {
           this.courses = value.body;

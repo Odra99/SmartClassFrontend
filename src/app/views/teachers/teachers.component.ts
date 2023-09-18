@@ -37,7 +37,19 @@ export class TeachersComponent implements OnInit {
   }
 
   getInfo() {
-    if (!this.teachers) {
+    if(this.showConfig){
+      if(this.teachers){
+
+        this.selectedTeachers = [...this.teachers];
+        }
+      this.teacherService.listAll().subscribe({
+        
+        next: (value) => {
+          this.teachers = value.body;
+        },
+      })
+
+    }else if(!this.teachers) {
       this.teacherService.listAll().subscribe({
         next: (value) => {
           this.teachers = value.body;
@@ -52,6 +64,11 @@ export class TeachersComponent implements OnInit {
 
   selectTeacher(area: any): void {
     this.selectedTeacher = area;
+  }
+
+  selectAll(){
+    this.selectedTeachers = [...this.teachers]
+    this.teachers =[]
   }
 
   drop(event: CdkDragDrop<Teacher[]>) {

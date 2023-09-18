@@ -19,4 +19,8 @@ export class CourseService {
   listAll(): Observable<HttpResponse<any>> {
     return this.http.get<HttpResponse<any>>(baseUrl, {  observe: 'response' });
   }
+
+  listAllAssignments(): Observable<HttpResponse<any>> {
+    return this.http.get<HttpResponse<any>>(baseUrl+"/assignments", {  observe: 'response' });
+  }
 }

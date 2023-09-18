@@ -13,3 +13,8 @@ export class Assignment{
     public section!:string;
 
 }
+
+export class CourseAssignment{
+    public code!:string;
+    public no_students!:number;
+}

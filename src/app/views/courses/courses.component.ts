@@ -32,8 +32,26 @@ export class CoursesComponent implements OnInit {
     this.coursess.emit(this.selectedCourses)
   }
 
+  selectAll(){
+    this.selectedCourses = [...this.courses]
+    this.courses =[]
+  }
+
+
   getInfo() {
-    if (!this.courses) {
+    if(this.showConfig){
+
+      if(this.courses){
+
+        this.selectedCourses = [...this.courses];
+        }
+      this.courseService.listAll().subscribe({
+        next: (value) => {
+          this.courses = value.body;
+        },
+      })
+
+    }else if (!this.courses) {
       this.courseService.listAll().subscribe({
         next: (value) => {
           this.courses = value.body;

@@ -2,10 +2,11 @@
   <app-navbar></app-navbar>
   <div class="container-fluid h-100" >
     <div class="row h-100 w-100 mt-3 justify-content-center">
-      <div class=" col-12 d-flex justify-content-center">
-        <h2>Horario</h2>
+      <div class=" col-12 d-flex justify-content-center align-items-center">
+        <h2 class="pe-3">Horario</h2>
+        <span *ngIf="schedule">Eficiencia:{{schedule.efficiency}}</span>
       </div>
-      <div class="col-12 p-4 p-lg-5 w-75 d-flex justify-content-between">
+      <div class="col-12 p-4 p-lg-5 w-100 d-flex justify-content-between">
         <button class="btn btn-primary d-flex align-items-center" (click)="changeArea()">
           <app-icon class="pe-3">category</app-icon>Area</button>
         <button class="btn btn-primary  d-flex align-items-center" (click)="changeTeacher()"><app-icon
@@ -18,8 +19,14 @@
             <app-icon class="pe-3">block</app-icon>Restricciones</button>
             <button class="btn btn-primary  d-flex align-items-center" (click)="changePriority()">
               <app-icon class="pe-3">priority_high</app-icon>Prioridades</button>
+              <button class="btn btn-primary  d-flex align-items-center" (click)="changeAssignment()">
+                <app-icon class="pe-3">assignment</app-icon>Asignaciones</button>
           <button class="btn btn-primary  d-flex align-items-center" (click)="changeSchedule()">
             <app-icon class="pe-3">calendar_view_month</app-icon>Horario</button>
+            <button class="btn btn-primary  d-flex align-items-center" (click)="generateSchedule()">
+              <app-icon class="pe-3">event_available</app-icon>Generar Horario</button>
+              <button class="btn btn-primary  d-flex align-items-center" (click)="finish()">
+                <app-icon class="pe-3">event_available</app-icon>Generar Nuevo</button>
       </div>
       <ng-container *ngIf="schedule" >
         <div class=" col-12 h-100 p-4 p-lg-5" *ngIf="showSchedule" >
@@ -82,7 +89,7 @@
         <app-teachers [teachers]="schedule.teachers" [showConfig]="showConfig" [showSide]="false" (teacherss)="saveTeachers($event)"></app-teachers>
       </ng-container>
       <ng-container *ngIf="showArea">
-        <app-areas [areas]="schedule.area_configurations" [showConfig]="showConfig" [showSide]="false" (areass)="saveAreas($event)"></app-areas>
+        <app-areas [areas]="schedule.areas" [showConfig]="showConfig" [showSide]="false" (areass)="saveAreas($event)"></app-areas>
       </ng-container>
       <ng-container *ngIf="showClasses">
         <app-classes [classrooms]="schedule.classes_configurations" [showConfig]="showConfig" [showSide]="false" (classroomss)="saveClases($event)"></app-classes>
@@ -95,6 +102,9 @@
       </ng-container>
       <ng-container *ngIf="showRestriction">
         <app-restrictions [courses]="schedule.restrictions" [showConfig]="showConfig" [showSide]="false" (restrictions)="saveRestrictions($event)"></app-restrictions>
+      </ng-container>
+      <ng-container *ngIf="showAssigments">
+        <app-courses-assignments [areas]="schedule.course_assignment" [showConfig]="showConfig" [showSide]="false" (areass)="saveAssignments($event)"></app-courses-assignments>
       </ng-container>
     </div>
   </div>

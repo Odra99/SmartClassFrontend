@@ -9,6 +9,7 @@ import { ScheduleComponent } from './views/schedule/schedule.component';
 import { RestrictionsComponent } from './views/restrictions/restrictions.component';
 import { PrioritiesComponent } from './views/priorities/priorities.component';
 import { LoadFilesComponent } from './views/load-files/load-files.component';
+import { CoursesAssignmentsComponent } from './views/courses-assignments/courses-assignments.component';
 
 const routes: Routes = [
   { path: '', component: ScheduleDashboardComponent },
@@ -16,11 +17,13 @@ const routes: Routes = [
   { path: 'teachers', component: TeachersComponent },
   { path: 'classes', component: ClassesComponent },
   { path: 'courses', component: CoursesComponent },
-  { path: 'schedule', component: ScheduleComponent },
+  { path: 'schedule', component: ScheduleComponent, },
+  { path: 'schedule/:id', component: ScheduleComponent, },
   { path: 'restriction', component: RestrictionsComponent },
   { path: 'priority', component: PrioritiesComponent },
   { path: 'load-files', component: LoadFilesComponent },
-  { path: 'statistics', component: ScheduleDashboardComponent}
+  { path: 'statistics', component: ScheduleDashboardComponent},
+  { path: 'assignments', component: CoursesAssignmentsComponent}
 ];
 
 @NgModule({

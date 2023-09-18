@@ -1,5 +1,5 @@
 import { Area } from "./area";
-import { Assignment } from "./assignment"
+import { Assignment, CourseAssignment } from "./assignment"
 import { Classroom } from "./class"
 import { Course } from "./course"
 import { Priority } from "./priorities";
@@ -15,13 +15,19 @@ export class Schedule{
     public classes_configurations!:Classroom[]
     public courses!:Course[]
     public restrictions!:Restriction[]
-    public area_configurations!:Area[]
+    public areas!:Area[]
+    public area_configurations!:AreaConfiguration[]
     public teachers!:Teacher[]
     public assignments!:Assignment[]
     public version!:string
+    public efficiency!:number
     public matrixAssingments!:any[]
+    public course_assignment!:CourseAssignment[]
 }
 
-export class ScheduleConfigurationPriorityCriteria {
-    
+export class AreaConfiguration {
+    public area_name!:string
+    public start_time!:string
+    public end_time!:string
+    public order!:number    
 }

@@ -23,6 +23,7 @@ import { RestrictionsComponent } from './views/restrictions/restrictions.compone
 import { PrioritiesComponent } from './views/priorities/priorities.component';
 import { TranslocoRootModule } from './transloco-root.module';
 import { LoadFilesComponent } from './views/load-files/load-files.component';
+import { CoursesAssignmentsComponent } from './views/courses-assignments/courses-assignments.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,8 @@ import { LoadFilesComponent } from './views/load-files/load-files.component';
     CoursesComponent,
     RestrictionsComponent,
     PrioritiesComponent,
-    LoadFilesComponent
+    LoadFilesComponent,
+    CoursesAssignmentsComponent
   ],
   imports: [
     BrowserModule,

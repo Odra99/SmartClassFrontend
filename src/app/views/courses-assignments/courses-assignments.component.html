@@ -1,0 +1,80 @@
+<div class="d-flex ">
+    <ng-container *ngIf="showSide">
+        <app-navbar></app-navbar>
+    </ng-container>
+    <div class="container-fluid h-100">
+      <div class="row h-100 w-100 mt-5 ">
+        <div class=" col-12 d-flex justify-content-center">
+          <h1>Asignaciones</h1>
+        </div>
+        <ng-container *ngIf="!showConfig">
+          <div class=" col-6  h-100 p-4 p-lg-5">
+            <div class="d-flex flex-column row-gap-3 overflow-y-scroll teachers-list">
+              <div *ngFor="let area of areas" (click)="selectArea(area)" class="bg-body-secondary card border-light">
+                <div class="d-flex card-body align-items-center column-gap-3 shadow-sm">
+                  <app-icon [size]="30">assignment</app-icon>
+                  <span>{{area.code}}</span>
+    
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class=" col-6  p-4 p-lg-5 d-flex flex-grow-1 ">
+            <div *ngIf="!selectedArea" class="d-flex bg-body-secondary  align-items-center justify-content-center w-100 shadow-sm rounded">
+              <span>Seleccione una asignacion</span>
+            </div>
+            <div *ngIf="selectedArea" class="d-flex bg-body-secondary  align-items-center justify-content-center w-100 shadow-sm rounded">
+              <div class="bg-white w-75 h-75 d-flex  flex-column p-3 justify-content-center shadow-sm rounded">
+                <h5 class="fw-bold">Datos de la Asignacion</h5 >
+                <div class="d-flex flex-column">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="area_name" placeholder="Area comun" [(ngModel)]="selectedArea.code">
+                    <label for="area_name">Codigo del curso de la asignacion</label>
+                  </div>
+    
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="showConfig">
+          <div class="d-flex justify-content-start">
+            <div class="p-3 " >
+                <button class="btn btn-primary" (click)="saveAreas()"><app-icon>settings</app-icon> Guardar Configuracion</button>
+            </div> <div class="p-3" >
+                <button class="btn btn-primary" (click)="selectAll()"><app-icon>settings</app-icon> Seleccionar Todos</button>
+            </div>
+        </div>
+          <div class="col-12">
+            <div cdkDropListGroup>
+                <div class="example-container">
+                  <h2>Assignaciones</h2>
+              
+                  <div
+                    cdkDropList
+                    [cdkDropListData]="areas"
+                    class="example-list"
+                    cdkDropListSortingDisabled
+                    (cdkDropListDropped)="drop($event)">
+                    <div class="example-box" *ngFor="let item of areas" cdkDrag>{{item.code}}</div>
+                  </div>
+                </div>
+              
+                <div class="example-container">
+                  <h2>Assignaciones Seleccionadas</h2>
+              
+                  <div
+                    cdkDropList
+                    [cdkDropListData]="selectedAreas"
+                    class="example-list"
+                    (cdkDropListDropped)="drop($event)">
+                    <div class="example-box" *ngFor="let item of selectedAreas" cdkDrag>{{item.code}}</div>
+                  </div>
+                </div>
+              </div>
+           </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>

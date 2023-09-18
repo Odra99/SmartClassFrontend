@@ -1,32 +1,33 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Area } from 'src/app/data/area';
+import { CourseAssignment } from 'src/app/data/assignment';
 import { AreaService } from 'src/app/services/areas.service';
+import { CourseService } from 'src/app/services/course.service';
 import { ToasterService } from 'src/app/services/others/toaster.service';
 import { ToasterEnum } from 'src/global/toaster-enum';
 
 @Component({
-  selector: 'app-areas',
-  templateUrl: './areas.component.html',
-  styleUrls: ['./areas.component.scss']
+  selector: 'app-courses-assignments',
+  templateUrl: './courses-assignments.component.html',
+  styleUrls: ['./courses-assignments.component.scss']
 })
-export class AreasComponent implements OnInit {
+export class CoursesAssignmentsComponent  implements OnInit {
 
-  @Input() areas!: Area[];
+  @Input() areas!: CourseAssignment[];
 
-  selectedArea!: Area;
+  selectedArea!: CourseAssignment;
   @Input() showSide = true
 
-  selectedAreas:Area[]=[]
+  selectedAreas:CourseAssignment[]=[]
   @Input() showConfig=false;  
-  @Output() areass = new EventEmitter<Area[]>();
+  @Output() areass = new EventEmitter<CourseAssignment[]>();
 
 
-  constructor(private areaService: AreaService,
+  constructor(private courseService: CourseService,
     private toast: ToasterService) {
 
   }
-
 
   selectAll(){
     this.selectedAreas = [...this.areas]
@@ -47,14 +48,14 @@ export class AreasComponent implements OnInit {
 
         this.selectedAreas = [...this.areas];
         }
-      this.areaService.listAll().subscribe({
+      this.courseService.listAllAssignments().subscribe({
         next: (value) => {
           this.areas = value.body;
         },
       })
 
     }else if  (!this.areas) {
-      this.areaService.listAll().subscribe({
+      this.courseService.listAllAssignments().subscribe({
         next: (value) => {
           this.areas = value.body;
         },
@@ -66,18 +67,8 @@ export class AreasComponent implements OnInit {
     this.selectedArea = area;
   }
 
-  save() {
-    this.areaService.save(this.selectedArea).subscribe({
-      next: () => {
-        this.toast.show({ message: 'Cambios guardados', type: ToasterEnum.SUCCESS })
-        this.getInfo()
-      }, error: () => {
-        this.toast.show({ message: 'Error', type: ToasterEnum.ERROR })
-      },
-    })
-  }
 
-  drop(event: CdkDragDrop<Area[]>) {
+  drop(event: CdkDragDrop<CourseAssignment[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {

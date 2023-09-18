@@ -33,8 +33,24 @@ export class ClassesComponent implements OnInit {
     this.classroomss.emit(this.selectedClassrooms)
   }
 
+  selectAll(){
+    this.selectedClassrooms = [...this.classrooms]
+    this.classrooms =[]
+  }
+
   getInfo() {
-    if (!this.classrooms) {
+    if(this.showConfig){
+      if(this.classrooms){
+
+        this.selectedClassrooms = [...this.classrooms];
+        }
+      this.classroomService.listAll().subscribe({
+        next: (value) => {
+          this.classrooms = value.body;
+        },
+      })
+
+    }else if (!this.classrooms) {
       this.classroomService.listAll().subscribe({
         next: (value) => {
           this.classrooms = value.body;
