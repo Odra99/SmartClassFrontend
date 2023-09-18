@@ -15,6 +15,10 @@ export class AreasComponent implements OnInit {
 
   selectedArea!: Area;
   @Input() showSide = true
+
+  selectedAreas:Area[]=[]
+  showConfig=true;
+
   constructor(private areaService: AreaService,
     private toast: ToasterService) {
 

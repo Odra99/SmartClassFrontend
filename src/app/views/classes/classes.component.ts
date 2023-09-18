@@ -14,6 +14,8 @@ export class ClassesComponent implements OnInit {
   @Input() showSide=true
 
   selectedClassroom!: Classroom;
+  selectedClassrooms:Classroom[]=[];
+  showConfig=true;
 
   constructor(private classroomService: ClassroomService,
     private toast: ToasterService) {

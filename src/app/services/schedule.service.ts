@@ -19,4 +19,8 @@ export class ScheduleService {
   getSchedule(): Observable<HttpResponse<any>> {
     return this.http.get<HttpResponse<any>>(baseUrl, {  observe: 'response' });
   }
+
+  getScheduleById(id:string): Observable<HttpResponse<any>> {
+    return this.http.get<HttpResponse<any>>(`${baseUrl}/${id}`, {  observe: 'response' });
+  }
 }

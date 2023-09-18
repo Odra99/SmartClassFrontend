@@ -1,7 +1,17 @@
+import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDropList,
+  CdkDropListGroup,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
+
 import { Component, Input, OnInit } from '@angular/core';
 import { Teacher } from 'src/app/data/teacher';
 import { ToasterService } from 'src/app/services/others/toaster.service';
 import { TeacherService } from 'src/app/services/teacher.service';
+
 
 @Component({
   selector: 'app-teachers',
@@ -12,8 +22,9 @@ export class TeachersComponent implements OnInit{
 
   @Input() teachers!: Teacher[];
   @Input() showSide=true
-
+  selectedTeachers:Teacher[]=[];
   selectedTeacher!: Teacher;
+  showConfig=true;
 
   constructor(private teacherService: TeacherService,
     private toast: ToasterService) {
@@ -36,6 +47,19 @@ export class TeachersComponent implements OnInit{
 
   selectTeacher(area: any): void {
     this.selectedTeacher = area;
+  }
+
+  drop(event: CdkDragDrop<Teacher[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
   }
 
 }

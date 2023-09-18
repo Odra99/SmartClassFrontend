@@ -1,5 +1,6 @@
 import { KeyValue } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Schedule } from 'src/app/data/schedule';
 import { ToasterService } from 'src/app/services/others/toaster.service';
 import { ScheduleService } from 'src/app/services/schedule.service';
@@ -13,66 +14,76 @@ import { RestrictionEnum } from 'src/global/restriction-enum';
 export class ScheduleComponent implements OnInit {
 
   @Input() schedule!: Schedule;
-  scheduleTime:string[]=[]
-  matrixAssignment:any[]=[]
-  showSchedule=true
-  showTeacher=false
-  showClasses=false
-  showArea=false
-  showCourse=false
+  scheduleTime: string[] = []
+  matrixAssignment: any[] = []
+  showSchedule = true
+  showTeacher = false
+  showClasses = false
+  showArea = false
+  showCourse = false
+  id!: string | null
 
   constructor(private scheduleService: ScheduleService,
-    private toast: ToasterService) {
+    private toast: ToasterService,
+    private activatedRoute: ActivatedRoute,) {
 
   }
 
-  changeTeacher(){
-    this.showSchedule=false
-    this.showClasses=false
-    this.showArea=false
-    this.showCourse=false
-    this.showTeacher=true
+  changeTeacher() {
+    this.showSchedule = false
+    this.showClasses = false
+    this.showArea = false
+    this.showCourse = false
+    this.showTeacher = true
   }
 
-  changeClasses(){
-    this.showSchedule=false
-    this.showClasses=true
-    this.showArea=false
-    this.showCourse=false
-    this.showTeacher=false
+  changeClasses() {
+    this.showSchedule = false
+    this.showClasses = true
+    this.showArea = false
+    this.showCourse = false
+    this.showTeacher = false
   }
 
-  changeArea(){
-    this.showSchedule=false
-    this.showClasses=false
-    this.showArea=true
-    this.showCourse=false
-    this.showTeacher=false
+  changeArea() {
+    this.showSchedule = false
+    this.showClasses = false
+    this.showArea = true
+    this.showCourse = false
+    this.showTeacher = false
   }
 
-  changeCourse(){
-    this.showSchedule=false
-    this.showClasses=false
-    this.showArea=false
-    this.showCourse=true
-    this.showTeacher=false
+  changeCourse() {
+    this.showSchedule = false
+    this.showClasses = false
+    this.showArea = false
+    this.showCourse = true
+    this.showTeacher = false
   }
 
-  changeSchedule(){
-    this.showSchedule=true
-    this.showClasses=false
-    this.showArea=false
-    this.showCourse=false
-    this.showTeacher=false
+  changeSchedule() {
+    this.showSchedule = true
+    this.showClasses = false
+    this.showArea = false
+    this.showCourse = false
+    this.showTeacher = false
   }
 
   ngOnInit(): void {
-    this.showSchedule=true
-    this.showTeacher=false
-    this.showClasses=false
-    this.showArea=false
-    this.showCourse=false
-    this.getInfo();
+    this.showSchedule = true
+    this.showTeacher = false
+    this.showClasses = false
+    this.showArea = false
+    this.showCourse = false
+
+    this.id = this.activatedRoute.snapshot.paramMap.get('hashId');
+
+    if (this.id == null) {
+      this.getInfo();
+    }
+    else{
+
+    }
   }
 
   getInfo() {
@@ -84,7 +95,18 @@ export class ScheduleComponent implements OnInit {
     })
   }
 
-  originalOrder = (a: KeyValue<number,string>, b: KeyValue<number,string>): number => {
+  getInfoById(){
+    if(this.id){
+      this.scheduleService.getScheduleById(this.id).subscribe({
+        next: (value) => {
+          this.schedule = value.body;
+          this.calculateTimes();
+        },
+      })
+    }
+  }
+
+  originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
     return 0;
   }
 
@@ -97,17 +119,17 @@ export class ScheduleComponent implements OnInit {
       return
     }
     var startTimem = (startTime).split(":"),
-        endTimem = (endTime).split(":"),
-        periodDuration = (period_duration).split(":"),
-        tstartTime = new Date(),
-        tendTime = new Date();
+      endTimem = (endTime).split(":"),
+      periodDuration = (period_duration).split(":"),
+      tstartTime = new Date(),
+      tendTime = new Date();
     tstartTime.setHours(parseInt(startTimem[0]), parseInt(startTimem[1]), 0);
     tendTime.setHours(parseInt(endTimem[0]), parseInt(endTimem[1]), 0)
-    while (tstartTime<tendTime){
+    while (tstartTime < tendTime) {
       let aux = tstartTime.toTimeString().split(' ')[0];
       tstartTime.setHours(tstartTime.getHours(), tstartTime.getMinutes() + parseInt(periodDuration[1]));
-      this.scheduleTime.push(aux+"-"+tstartTime.toTimeString().split(' ')[0])
-    }    
+      this.scheduleTime.push(aux + "-" + tstartTime.toTimeString().split(' ')[0])
+    }
   }
 
 

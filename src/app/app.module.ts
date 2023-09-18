@@ -4,12 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { AreaConfigComponent } from './components/area-config/area-config.component';
 import { RestrictionsConfigComponent } from './components/restrictions-config/restrictions-config.component';
-import { ClassConfigComponent } from './components/class-config/class-config.component';
-import { PriorityCriteriaConfigComponent } from './components/priority-criteria-config/priority-criteria-config.component';
-import { CourseConfigComponent } from './components/course-config/course-config.component';
-import { TeacherConfigComponent } from './components/teacher-config/teacher-config.component';
 import { SheduleConfigComponent } from './views/shedule-config/shedule-config.component';
 import { ScheduleComponent } from './views/schedule/schedule.component';
 import { IconComponent } from './components/icon/icon.component';
@@ -23,17 +18,13 @@ import { CoursesComponent } from './views/courses/courses.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { FormsModule } from '@angular/forms';
-
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    AreaConfigComponent,
     RestrictionsConfigComponent,
-    ClassConfigComponent,
-    PriorityCriteriaConfigComponent,
-    CourseConfigComponent,
-    TeacherConfigComponent,
     SheduleConfigComponent,
     ScheduleComponent,
     IconComponent,
@@ -51,6 +42,8 @@ import { FormsModule } from '@angular/forms';
     ColorPickerModule,
     NgbModule,
     FormsModule,
+    NoopAnimationsModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

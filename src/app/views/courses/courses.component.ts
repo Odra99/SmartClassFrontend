@@ -14,7 +14,8 @@ export class CoursesComponent implements OnInit {
     @Input() showSide=false
 
   selectedCourse!: Course;
-
+  selectedCourses:Course[]=[]
+  showConfig=true;
   constructor(private courseService: CourseService,
     private toast: ToasterService) {
 
