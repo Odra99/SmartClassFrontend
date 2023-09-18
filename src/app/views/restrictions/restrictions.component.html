@@ -7,7 +7,12 @@
             <div class=" col-12 d-flex justify-content-center">
                 <h1>Restricciones</h1>
             </div>
-            <ng-container *ngIf="!showConfig">
+
+            <div class="p-3" *ngIf="!showConfig">
+                <button class="btn btn-primary" (click)="saveRestriction()"><app-icon>settings</app-icon> Guardar Configuracion</button>
+            </div>
+            
+            <ng-container >
                 <div class=" col-6 h-75 p-4 p-lg-5  ">
                     <div class="d-flex flex-column row-gap-3 overflow-y-scroll teachers-list">
                         <div *ngFor="let course of courses" (click)="selectCourse(course)"
@@ -32,12 +37,12 @@
                             <div class="d-flex flex-column">
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="area_name" placeholder="Area comun"
-                                        [(ngModel)]="selectedCourse.name" readonly="true">
+                                        [(ngModel)]="selectedCourse.name" [readonly]="!showConfig">
                                     <label for="area_name">Nombre de la restriccion</label>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="area_name" placeholder="Area comun"
-                                        [(ngModel)]="selectedCourse.value" readonly="true">
+                                        [(ngModel)]="selectedCourse.value" [readonly]="!showConfig">
                                     <label for="area_name">Valor de la restriccion</label>
                                 </div>
                             </div>
@@ -45,7 +50,7 @@
                     </div>
                 </div>
             </ng-container>
-            <ng-container *ngIf="showConfig">
+            <ng-container *ngIf="false">
                 <div class="col-12">
                     <div cdkDropListGroup>
                         <div class="example-container">

@@ -1,8 +1,10 @@
 export class Priority{
-    public id!:number
+    public id!:number | null
     public description!:string
     public type!:Type
     public subtype!:Type
+    public asc:boolean = false
+    public order!:number
 }
 
 export class Type{

@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Priority } from 'src/app/data/priorities';
 import { ToasterService } from 'src/app/services/others/toaster.service';
 import { PriorityService } from 'src/app/services/priorities.service';
@@ -12,45 +12,52 @@ import { PriorityService } from 'src/app/services/priorities.service';
 export class PrioritiesComponent implements OnInit {
 
   @Input() courses!: Priority[];
-  @Input() showSide=true
+  @Input() showSide = true
 
-selectedCourse!: Priority;
-selectedCourses:Priority[]=[]
-showConfig=false;
-constructor(private priorityService: PriorityService,
-  private toast: ToasterService) {
+  selectedCourse!: Priority;
+  selectedCourses: Priority[] = []
+  @Input() showConfig = false;
 
-}
+  @Output() priorities = new EventEmitter<Priority[]>();
 
-ngOnInit(): void {
-  this.getInfo();
-}
+  constructor(private priorityService: PriorityService,
+    private toast: ToasterService) {
 
-getInfo() {
-  if(!this.courses){
-    this.priorityService.listAll().subscribe({
-      next: (value) => {
-        this.courses = value.body;
-      },
-    })
   }
-}
 
-selectCourse(classroom: any): void {
-  this.selectedCourse = classroom;
-}
-
-drop(event: CdkDragDrop<Priority[]>) {
-  if (event.previousContainer === event.container) {
-    moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-  } else {
-    transferArrayItem(
-      event.previousContainer.data,
-      event.container.data,
-      event.previousIndex,
-      event.currentIndex,
-    );
+  savePriorities() {
+    this.priorities.emit(this.selectedCourses)
   }
-}
+
+  ngOnInit(): void {
+    this.getInfo();
+  }
+
+  getInfo() {
+    if (!this.courses) {
+      this.priorityService.listAll().subscribe({
+        next: (value) => {
+          this.courses = value.body;
+        },
+      })
+    }
+  }
+
+  selectCourse(classroom: any): void {
+    this.selectedCourse = classroom;
+  }
+
+  drop(event: CdkDragDrop<Priority[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+  }
 
 }

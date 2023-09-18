@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Area } from 'src/app/data/area';
 import { AreaService } from 'src/app/services/areas.service';
 import { ToasterService } from 'src/app/services/others/toaster.service';
@@ -18,7 +18,9 @@ export class AreasComponent implements OnInit {
   @Input() showSide = true
 
   selectedAreas:Area[]=[]
-  showConfig=false;
+  @Input() showConfig=false;  
+  @Output() areass = new EventEmitter<Area[]>();
+
 
   constructor(private areaService: AreaService,
     private toast: ToasterService) {
@@ -27,6 +29,10 @@ export class AreasComponent implements OnInit {
 
   ngOnInit(): void {
     this.getInfo();
+  }
+
+  saveAreas(){
+    this.areass.emit(this.selectedAreas)
   }
 
   getInfo() {

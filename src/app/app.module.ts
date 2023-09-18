@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RestrictionsConfigComponent } from './components/restrictions-config/restrictions-config.component';
-import { SheduleConfigComponent } from './views/shedule-config/shedule-config.component';
 import { ScheduleComponent } from './views/schedule/schedule.component';
 import { IconComponent } from './components/icon/icon.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -23,13 +22,12 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { RestrictionsComponent } from './views/restrictions/restrictions.component';
 import { PrioritiesComponent } from './views/priorities/priorities.component';
 import { TranslocoRootModule } from './transloco-root.module';
-import { TranslocoService } from '@ngneat/transloco';
+import { LoadFilesComponent } from './views/load-files/load-files.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     RestrictionsConfigComponent,
-    SheduleConfigComponent,
     ScheduleComponent,
     IconComponent,
     ScheduleDashboardComponent,
@@ -39,7 +37,8 @@ import { TranslocoService } from '@ngneat/transloco';
     AreasComponent,
     CoursesComponent,
     RestrictionsComponent,
-    PrioritiesComponent
+    PrioritiesComponent,
+    LoadFilesComponent
   ],
   imports: [
     BrowserModule,

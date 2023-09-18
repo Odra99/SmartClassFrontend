@@ -1,6 +1,6 @@
 <div class="d-flex ">
   <app-navbar></app-navbar>
-  <div class="container-fluid h-100" *ngIf="schedule">
+  <div class="container-fluid h-100" >
     <div class="row h-100 w-100 mt-3 justify-content-center">
       <div class=" col-12 d-flex justify-content-center">
         <h2>Horario</h2>
@@ -21,77 +21,80 @@
           <button class="btn btn-primary  d-flex align-items-center" (click)="changeSchedule()">
             <app-icon class="pe-3">calendar_view_month</app-icon>Horario</button>
       </div>
-      <div class=" col-12 h-100 p-4 p-lg-5" *ngIf="showSchedule">
-        <div id="table-scroll" class="table-scroll">
-          <table id="main-table" class="main-table">
-            <thead>
-              <tr>
-                <th scope="col">Horario</th>
-                <ng-container *ngFor="let classroom of schedule.classes_configurations">
-                  <th scope="col">{{classroom.name}}</th>
-                </ng-container>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let sheduleT of schedule.matrixAssingments |keyvalue">
-                <th>{{sheduleT.key}}</th>
-                <ng-container *ngFor="let sub of sheduleT.value | keyvalue:originalOrder">
-                  <td *ngIf="sub.value">
-                    <div class="card assignment-card ">
-                      <div class="card-header">
-
+      <ng-container *ngIf="schedule" >
+        <div class=" col-12 h-100 p-4 p-lg-5" *ngIf="showSchedule" >
+          <div id="table-scroll" class="table-scroll">
+            <table id="main-table" class="main-table">
+              <thead>
+                <tr>
+                  <th scope="col">Horario</th>
+                  <ng-container *ngFor="let classroom of schedule.classes_configurations">
+                    <th scope="col">{{classroom.name}}</th>
+                  </ng-container>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let sheduleT of schedule.matrixAssingments |keyvalue">
+                  <th>{{sheduleT.key}}</th>
+                  <ng-container *ngFor="let sub of sheduleT.value | keyvalue:originalOrder">
+                    <td *ngIf="sub.value">
+                      <div class="card assignment-card ">
+                        <div class="card-header">
+  
+                        </div>
+                        <div class="card-body">
+                          <ng-container *ngFor="let nestedValue of sub.value | keyvalue">
+                            <ng-container *ngIf="nestedValue.key=='course'">
+                              <div class="d-flex flex-row ">
+                                <app-icon class="pe-3">book</app-icon>
+                                {{nestedValue.value}}
+                              </div>
+                            </ng-container>
+                            <ng-container *ngIf="nestedValue.key=='teacher'">
+                              <div class="d-flex flex-row">
+                                <app-icon class="pe-3">work_history</app-icon>
+                                {{nestedValue.value}}
+                              </div>
+                            </ng-container>
+                            <ng-container *ngIf="nestedValue.key=='section'">
+                              <div class="d-flex flex-row">
+                                <app-icon class="pe-3">abc</app-icon>
+                                {{nestedValue.value}}
+                              </div>
+                            </ng-container>
+                          </ng-container>
+                        </div>
                       </div>
-                      <div class="card-body">
-                        <ng-container *ngFor="let nestedValue of sub.value | keyvalue">
-                          <ng-container *ngIf="nestedValue.key=='course'">
-                            <div class="d-flex flex-row ">
-                              <app-icon class="pe-3">book</app-icon>
-                              {{nestedValue.value}}
-                            </div>
-                          </ng-container>
-                          <ng-container *ngIf="nestedValue.key=='teacher'">
-                            <div class="d-flex flex-row">
-                              <app-icon class="pe-3">work_history</app-icon>
-                              {{nestedValue.value}}
-                            </div>
-                          </ng-container>
-                          <ng-container *ngIf="nestedValue.key=='section'">
-                            <div class="d-flex flex-row">
-                              <app-icon class="pe-3">abc</app-icon>
-                              {{nestedValue.value}}
-                            </div>
-                          </ng-container>
-                        </ng-container>
-                      </div>
-                    </div>
-                  </td>
-                  <td *ngIf="!sub.value">
-
-                  </td>
-                </ng-container>
-              </tr>
-
-            </tbody>
-          </table>
+                    </td>
+                    <td *ngIf="!sub.value">
+  
+                    </td>
+                  </ng-container>
+                </tr>
+  
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      </ng-container>
+      
       <ng-container *ngIf="showTeacher">
-        <app-teachers [teachers]="schedule.teachers" [showSide]="false"></app-teachers>
+        <app-teachers [teachers]="schedule.teachers" [showConfig]="showConfig" [showSide]="false" (teacherss)="saveTeachers($event)"></app-teachers>
       </ng-container>
       <ng-container *ngIf="showArea">
-        <app-areas [areas]="schedule.area_configurations" [showSide]="false"></app-areas>
+        <app-areas [areas]="schedule.area_configurations" [showConfig]="showConfig" [showSide]="false" (areass)="saveAreas($event)"></app-areas>
       </ng-container>
       <ng-container *ngIf="showClasses">
-        <app-classes [classrooms]="schedule.classes_configurations" [showSide]="false"></app-classes>
+        <app-classes [classrooms]="schedule.classes_configurations" [showConfig]="showConfig" [showSide]="false" (classroomss)="saveClases($event)"></app-classes>
       </ng-container>
       <ng-container *ngIf="showCourse">
-        <app-courses [courses]="schedule.courses" [showSide]="false"></app-courses>
+        <app-courses [courses]="schedule.courses" [showConfig]="showConfig" [showSide]="false" (coursess)="saveCourses($event)"></app-courses>
       </ng-container>
       <ng-container *ngIf="showPriority">
-        <app-priorities [courses]="schedule.priority_criterias" [showSide]="false"></app-priorities>
+        <app-priorities [courses]="schedule.priority_criterias" [showConfig]="showConfig" [showSide]="false" (priorities)="savePriorities($event)"></app-priorities>
       </ng-container>
       <ng-container *ngIf="showRestriction">
-        <app-restrictions [courses]="schedule.restrictions" [showSide]="false"></app-restrictions>
+        <app-restrictions [courses]="schedule.restrictions" [showConfig]="showConfig" [showSide]="false" (restrictions)="saveRestrictions($event)"></app-restrictions>
       </ng-container>
     </div>
   </div>

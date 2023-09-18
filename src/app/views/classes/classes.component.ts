@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Classroom } from 'src/app/data/class';
 import { ClassroomService } from 'src/app/services/classroom.service';
 import { ToasterService } from 'src/app/services/others/toaster.service';
@@ -12,11 +12,13 @@ import { ToasterService } from 'src/app/services/others/toaster.service';
 export class ClassesComponent implements OnInit {
 
   @Input() classrooms!: Classroom[];
-  @Input() showSide=true
+  @Input() showSide = true
 
   selectedClassroom!: Classroom;
-  selectedClassrooms:Classroom[]=[];
-  showConfig=false;
+  selectedClassrooms: Classroom[] = [];
+  @Input() showConfig = false;
+  @Output() classroomss = new EventEmitter<Classroom[]>();
+
 
   constructor(private classroomService: ClassroomService,
     private toast: ToasterService) {
@@ -27,8 +29,12 @@ export class ClassesComponent implements OnInit {
     this.getInfo();
   }
 
+  saveClases(){
+    this.classroomss.emit(this.selectedClassrooms)
+  }
+
   getInfo() {
-    if(!this.classrooms){
+    if (!this.classrooms) {
       this.classroomService.listAll().subscribe({
         next: (value) => {
           this.classrooms = value.body;

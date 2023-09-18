@@ -23,6 +23,7 @@ export class ScheduleComponent implements OnInit {
   showCourse = false
   showRestriction=false
   showPriority=false
+  showConfig = false
   id!: string | null
 
   constructor(private scheduleService: ScheduleService,
@@ -121,10 +122,14 @@ export class ScheduleComponent implements OnInit {
     this.scheduleService.getSchedule().subscribe({
       next: (value) => {
         this.schedule = value.body;
-        this.calculateTimes();
+        if(!this.schedule || !this.schedule.id){
+          this.showConfig = true
+        }
       },
     })
   }
+
+
 
   getInfoById(){
     if(this.id){
@@ -161,6 +166,39 @@ export class ScheduleComponent implements OnInit {
       tstartTime.setHours(tstartTime.getHours(), tstartTime.getMinutes() + parseInt(periodDuration[1]));
       this.scheduleTime.push(aux + "-" + tstartTime.toTimeString().split(' ')[0])
     }
+  }
+
+  savePriorities(priorities:any){
+    this.schedule.priority_criterias = priorities
+    for (let index = 0; index < this.schedule.priority_criterias.length; index++) {
+      this.schedule.priority_criterias[index].order=index;     
+      this.schedule.priority_criterias[index].id=null;      
+    }
+  }
+
+  saveRestrictions(restriction:any){
+    this.schedule.restrictions = restriction
+    for (let index = 0; index < this.schedule.restrictions.length; index++) {
+      this.schedule.restrictions[index].id=null;      
+    }
+    
+  }
+
+  saveTeachers(teachers:any){
+    this.schedule.teachers = teachers    
+  }
+
+  saveClases(clases:any){
+    this.schedule.classes_configurations = clases    
+  }
+
+  saveCourses(course:any){
+    this.schedule.courses = course
+  }
+
+
+  saveAreas(areas:any){
+    this.schedule.area_configurations = areas
   }
 
 

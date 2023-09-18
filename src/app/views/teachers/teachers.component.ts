@@ -7,7 +7,7 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Teacher } from 'src/app/data/teacher';
 import { ToasterService } from 'src/app/services/others/toaster.service';
 import { TeacherService } from 'src/app/services/teacher.service';
@@ -18,13 +18,14 @@ import { TeacherService } from 'src/app/services/teacher.service';
   templateUrl: './teachers.component.html',
   styleUrls: ['./teachers.component.scss']
 })
-export class TeachersComponent implements OnInit{
+export class TeachersComponent implements OnInit {
 
   @Input() teachers!: Teacher[];
-  @Input() showSide=true
-  selectedTeachers:Teacher[]=[];
+  @Input() showSide = true
+  selectedTeachers: Teacher[] = [];
   selectedTeacher!: Teacher;
-  showConfig=false;
+  @Input() showConfig = false;
+  @Output() teacherss = new EventEmitter<Teacher[]>();
 
   constructor(private teacherService: TeacherService,
     private toast: ToasterService) {
@@ -36,13 +37,17 @@ export class TeachersComponent implements OnInit{
   }
 
   getInfo() {
-    if(!this.teachers){
+    if (!this.teachers) {
       this.teacherService.listAll().subscribe({
         next: (value) => {
           this.teachers = value.body;
         },
       })
     }
+  }
+
+  saveTeacher(){
+    this.teacherss.emit(this.selectedTeachers)
   }
 
   selectTeacher(area: any): void {
