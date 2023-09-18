@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Area } from 'src/app/data/area';
 import { AreaService } from 'src/app/services/areas.service';
 import { ToasterService } from 'src/app/services/others/toaster.service';
@@ -11,10 +11,10 @@ import { ToasterEnum } from 'src/global/toaster-enum';
 })
 export class AreasComponent implements OnInit {
 
-  areas!: Area[];
+  @Input() areas!: Area[];
 
   selectedArea!: Area;
-
+  @Input() showSide = true
   constructor(private areaService: AreaService,
     private toast: ToasterService) {
 
@@ -25,11 +25,13 @@ export class AreasComponent implements OnInit {
   }
 
   getInfo() {
-    this.areaService.listAll().subscribe({
-      next: (value) => {
-        this.areas = value.body;
-      },
-    })
+    if (!this.areas) {
+      this.areaService.listAll().subscribe({
+        next: (value) => {
+          this.areas = value.body;
+        },
+      })
+    }
   }
 
   selectArea(area: any): void {

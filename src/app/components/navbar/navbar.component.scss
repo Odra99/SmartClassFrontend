@@ -9,7 +9,7 @@
   width: 6rem !important;
   position: fixed;
   background-color: #272838;
-
+  z-index: 10000;
   -webkit-transition: width 0.3s ease-in-out;
   -moz-transition: width 0.3s ease-in-out;
   -o-transition: width 0.3s ease-in-out;

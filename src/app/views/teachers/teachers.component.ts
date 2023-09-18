@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Teacher } from 'src/app/data/teacher';
 import { ToasterService } from 'src/app/services/others/toaster.service';
 import { TeacherService } from 'src/app/services/teacher.service';
@@ -9,7 +9,9 @@ import { TeacherService } from 'src/app/services/teacher.service';
   styleUrls: ['./teachers.component.scss']
 })
 export class TeachersComponent implements OnInit{
-  teachers!: Teacher[];
+
+  @Input() teachers!: Teacher[];
+  @Input() showSide=true
 
   selectedTeacher!: Teacher;
 
@@ -23,11 +25,13 @@ export class TeachersComponent implements OnInit{
   }
 
   getInfo() {
-    this.teacherService.listAll().subscribe({
-      next: (value) => {
-        this.teachers = value.body;
-      },
-    })
+    if(!this.teachers){
+      this.teacherService.listAll().subscribe({
+        next: (value) => {
+          this.teachers = value.body;
+        },
+      })
+    }
   }
 
   selectTeacher(area: any): void {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Course } from 'src/app/data/course';
 import { CourseService } from 'src/app/services/course.service';
 import { ToasterService } from 'src/app/services/others/toaster.service';
@@ -10,7 +10,8 @@ import { ToasterService } from 'src/app/services/others/toaster.service';
 })
 export class CoursesComponent implements OnInit {
 
-  courses!: Course[];
+    @Input() courses!: Course[];
+    @Input() showSide=false
 
   selectedCourse!: Course;
 
@@ -24,11 +25,13 @@ export class CoursesComponent implements OnInit {
   }
 
   getInfo() {
-    this.courseService.listAll().subscribe({
-      next: (value) => {
-        this.courses = value.body;
-      },
-    })
+    if(!this.courses){
+      this.courseService.listAll().subscribe({
+        next: (value) => {
+          this.courses = value.body;
+        },
+      })
+    }
   }
 
   selectCourse(classroom: any): void {

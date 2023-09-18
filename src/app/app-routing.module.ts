@@ -5,13 +5,15 @@ import { AreasComponent } from './views/areas/areas.component';
 import { TeachersComponent } from './views/teachers/teachers.component';
 import { ClassesComponent } from './views/classes/classes.component';
 import { CoursesComponent } from './views/courses/courses.component';
+import { ScheduleComponent } from './views/schedule/schedule.component';
 
 const routes: Routes = [
   { path: '', component: ScheduleDashboardComponent },
   { path: 'areas', component: AreasComponent },
   { path: 'teachers', component: TeachersComponent },
   { path: 'classes', component: ClassesComponent },
-  { path: 'courses', component: CoursesComponent }
+  { path: 'courses', component: CoursesComponent },
+  { path: 'schedule', component: ScheduleComponent }
 ];
 
 @NgModule({

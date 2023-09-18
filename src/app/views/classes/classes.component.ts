@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Classroom } from 'src/app/data/class';
 import { ClassroomService } from 'src/app/services/classroom.service';
 import { ToasterService } from 'src/app/services/others/toaster.service';
@@ -10,7 +10,8 @@ import { ToasterService } from 'src/app/services/others/toaster.service';
 })
 export class ClassesComponent implements OnInit {
 
-  classrooms!: Classroom[];
+  @Input() classrooms!: Classroom[];
+  @Input() showSide=true
 
   selectedClassroom!: Classroom;
 
@@ -24,11 +25,13 @@ export class ClassesComponent implements OnInit {
   }
 
   getInfo() {
-    this.classroomService.listAll().subscribe({
-      next: (value) => {
-        this.classrooms = value.body;
-      },
-    })
+    if(!this.classrooms){
+      this.classroomService.listAll().subscribe({
+        next: (value) => {
+          this.classrooms = value.body;
+        },
+      })
+    }
   }
 
   selectClassroom(classroom: any): void {

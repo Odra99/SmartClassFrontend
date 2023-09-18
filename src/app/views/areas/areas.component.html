@@ -1,5 +1,7 @@
 <div class="d-flex ">
-  <app-navbar></app-navbar>
+  <ng-container *ngIf="showSide">
+      <app-navbar></app-navbar>
+  </ng-container>
   <div class="container-fluid h-100">
     <div class="row h-100 w-100 mt-5 ">
       <div class=" col-12 d-flex justify-content-center">
