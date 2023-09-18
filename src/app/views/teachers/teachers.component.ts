@@ -24,7 +24,7 @@ export class TeachersComponent implements OnInit{
   @Input() showSide=true
   selectedTeachers:Teacher[]=[];
   selectedTeacher!: Teacher;
-  showConfig=true;
+  showConfig=false;
 
   constructor(private teacherService: TeacherService,
     private toast: ToasterService) {

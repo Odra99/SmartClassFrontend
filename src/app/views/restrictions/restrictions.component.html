@@ -1,11 +1,11 @@
-<div class="d-flex ">
+<div class="d-flex " *transloco="let t">
     <ng-container *ngIf="showSide">
         <app-navbar></app-navbar>
     </ng-container>
     <div class="container-fluid h-100">
         <div class="row h-100 w-100 mt-5 ">
             <div class=" col-12 d-flex justify-content-center">
-                <h1>Cursos</h1>
+                <h1>Restricciones</h1>
             </div>
             <ng-container *ngIf="!showConfig">
                 <div class=" col-6 h-75 p-4 p-lg-5  ">
@@ -13,8 +13,8 @@
                         <div *ngFor="let course of courses" (click)="selectCourse(course)"
                             class="bg-body-secondary card border-light">
                             <div class="d-flex card-body align-items-center column-gap-3 shadow-sm">
-                                <app-icon [size]="30">school</app-icon>
-                                <span>{{course.name}}</span>
+                                <app-icon [size]="30">block</app-icon>
+                                <span>{{t(course.name)}}</span>
     
                             </div>
                         </div>
@@ -23,61 +23,22 @@
                 <div class=" col-6  p-4 p-lg-5 d-flex flex-grow-1 ">
                     <div *ngIf="!selectedCourse"
                         class="d-flex bg-body-secondary  align-items-center justify-content-center w-100 shadow-sm rounded">
-                        <span>Seleccione un curso</span>
+                        <span>Seleccione una restriccion</span>
                     </div>
                     <div *ngIf="selectedCourse"
                         class="d-flex bg-body-secondary  align-items-center justify-content-center w-100 shadow-sm rounded">
                         <div class="bg-white w-75 h-75 d-flex  flex-column p-3 justify-content-center shadow-sm rounded">
-                            <h5 class="fw-bold">Datos del Curso</h5>
+                            <h5 class="fw-bold">Datos de la Restriccion</h5>
                             <div class="d-flex flex-column">
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="area_name" placeholder="Area comun"
                                         [(ngModel)]="selectedCourse.name" readonly="true">
-                                    <label for="area_name">Nombre del curso</label>
+                                    <label for="area_name">Nombre de la restriccion</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="space_capacity" placeholder="Area comun"
-                                        [(ngModel)]="selectedCourse.code" readonly="true">
-                                    <label for="space_capacity">Codigo</label>
-                                </div>
-                                <div>
-                                    <table class="table caption-top">
-                                        <caption>Horario</caption>
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Inicio</th>
-                                                <th scope="col">Fin</th>
-                                            </tr>
-    
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let item of selectedCourse.course_schedule; index as i">
-                                                <th scope="row">{{i+1}}</th>
-                                                <td>{{item.start_time}}</td>
-                                                <td>{{item.end_time}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-    
-                                </div>
-                                <div>
-                                    <table class="table caption-top">
-                                        <caption>Profesores</caption>
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Curso</th>
-                                                <th scope="col">Area</th>
-                                                <th scope="col">Titular</th>
-                                            </tr>
-    
-                                        </thead>
-                                        <tbody>
-                                           
-                                        </tbody>
-                                    </table>
-    
+                                    <input type="text" class="form-control" id="area_name" placeholder="Area comun"
+                                        [(ngModel)]="selectedCourse.value" readonly="true">
+                                    <label for="area_name">Valor de la restriccion</label>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +49,7 @@
                 <div class="col-12">
                     <div cdkDropListGroup>
                         <div class="example-container">
-                          <h2>Cursos</h2>
+                          <h2>Restricciones</h2>
                       
                           <div
                             cdkDropList
@@ -101,7 +62,7 @@
                         </div>
                       
                         <div class="example-container">
-                          <h2>Cursos Seleccionados</h2>
+                          <h2>Restricciones Seleccionados</h2>
                       
                           <div
                             cdkDropList

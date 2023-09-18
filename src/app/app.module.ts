@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +20,10 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { RestrictionsComponent } from './views/restrictions/restrictions.component';
+import { PrioritiesComponent } from './views/priorities/priorities.component';
+import { TranslocoRootModule } from './transloco-root.module';
+import { TranslocoService } from '@ngneat/transloco';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +37,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     ClassesComponent,
     TeachersComponent,
     AreasComponent,
-    CoursesComponent
+    CoursesComponent,
+    RestrictionsComponent,
+    PrioritiesComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +49,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     NgbModule,
     FormsModule,
     NoopAnimationsModule,
-    DragDropModule
+    DragDropModule,
+    TranslocoRootModule
   ],
   providers: [],
   bootstrap: [AppComponent]

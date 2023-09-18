@@ -6,6 +6,8 @@ import { TeachersComponent } from './views/teachers/teachers.component';
 import { ClassesComponent } from './views/classes/classes.component';
 import { CoursesComponent } from './views/courses/courses.component';
 import { ScheduleComponent } from './views/schedule/schedule.component';
+import { RestrictionsComponent } from './views/restrictions/restrictions.component';
+import { PrioritiesComponent } from './views/priorities/priorities.component';
 
 const routes: Routes = [
   { path: '', component: ScheduleDashboardComponent },
@@ -13,7 +15,9 @@ const routes: Routes = [
   { path: 'teachers', component: TeachersComponent },
   { path: 'classes', component: ClassesComponent },
   { path: 'courses', component: CoursesComponent },
-  { path: 'schedule', component: ScheduleComponent }
+  { path: 'schedule', component: ScheduleComponent },
+  { path: 'restriction', component: RestrictionsComponent },
+  { path: 'priority', component: PrioritiesComponent }
 ];
 
 @NgModule({

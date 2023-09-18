@@ -1,0 +1,75 @@
+<div class="d-flex ">
+    <ng-container *ngIf="showSide">
+        <app-navbar></app-navbar>
+    </ng-container>
+    <div class="container-fluid h-100">
+        <div class="row h-100 w-100 mt-5 ">
+            <div class=" col-12 d-flex justify-content-center">
+                <h1>Criterios de Prioridad</h1>
+            </div>
+            <ng-container *ngIf="!showConfig">
+                <div class=" col-6 h-75 p-4 p-lg-5  ">
+                    <div class="d-flex flex-column row-gap-3 overflow-y-scroll teachers-list">
+                        <div *ngFor="let course of courses" (click)="selectCourse(course)"
+                            class="bg-body-secondary card border-light">
+                            <div class="d-flex card-body align-items-center column-gap-3 shadow-sm">
+                                <app-icon [size]="30">school</app-icon>
+                                <span>{{course.description}}</span>
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-6  p-4 p-lg-5 d-flex flex-grow-1 ">
+                    <div *ngIf="!selectedCourse"
+                        class="d-flex bg-body-secondary  align-items-center justify-content-center w-100 shadow-sm rounded">
+                        <span>Seleccione una prioridad</span>
+                    </div>
+                    <div *ngIf="selectedCourse"
+                        class="d-flex bg-body-secondary  align-items-center justify-content-center w-100 shadow-sm rounded">
+                        <div class="bg-white w-75 h-75 d-flex  flex-column p-3 justify-content-center shadow-sm rounded">
+                            <h5 class="fw-bold">Datos de la prioridad</h5>
+                            <div class="d-flex flex-column">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="area_name" placeholder="Area comun"
+                                        [(ngModel)]="selectedCourse.description" readonly="true">
+                                    <label for="area_name">Nombre de la prioridad</label>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="showConfig">
+                <div class="col-12">
+                    <div cdkDropListGroup>
+                        <div class="example-container">
+                          <h2>Criterios de Prioridad</h2>
+                      
+                          <div
+                            cdkDropList
+                            [cdkDropListData]="courses"
+                            class="example-list"
+                            cdkDropListSortingDisabled
+                            (cdkDropListDropped)="drop($event)">
+                            <div class="example-box" *ngFor="let item of courses" cdkDrag>{{item.description}}</div>
+                          </div>
+                        </div>
+                      
+                        <div class="example-container">
+                          <h2>Criterios de Prioridad Seleccionados</h2>
+                      
+                          <div
+                            cdkDropList
+                            [cdkDropListData]="selectedCourses"
+                            class="example-list"
+                            (cdkDropListDropped)="drop($event)">
+                            <div class="example-box" *ngFor="let item of selectedCourses" cdkDrag>{{item.description}}</div>
+                          </div>
+                        </div>
+                      </div>
+                   </div>
+               </ng-container>
+        </div>
+    </div>

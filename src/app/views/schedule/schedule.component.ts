@@ -21,6 +21,8 @@ export class ScheduleComponent implements OnInit {
   showClasses = false
   showArea = false
   showCourse = false
+  showRestriction=false
+  showPriority=false
   id!: string | null
 
   constructor(private scheduleService: ScheduleService,
@@ -34,6 +36,8 @@ export class ScheduleComponent implements OnInit {
     this.showClasses = false
     this.showArea = false
     this.showCourse = false
+    this.showRestriction=false
+    this.showPriority=false
     this.showTeacher = true
   }
 
@@ -43,6 +47,8 @@ export class ScheduleComponent implements OnInit {
     this.showArea = false
     this.showCourse = false
     this.showTeacher = false
+    this.showRestriction=false
+    this.showPriority=false
   }
 
   changeArea() {
@@ -51,6 +57,8 @@ export class ScheduleComponent implements OnInit {
     this.showArea = true
     this.showCourse = false
     this.showTeacher = false
+    this.showRestriction=false
+    this.showPriority=false
   }
 
   changeCourse() {
@@ -59,6 +67,8 @@ export class ScheduleComponent implements OnInit {
     this.showArea = false
     this.showCourse = true
     this.showTeacher = false
+    this.showRestriction=false
+    this.showPriority=false
   }
 
   changeSchedule() {
@@ -67,6 +77,27 @@ export class ScheduleComponent implements OnInit {
     this.showArea = false
     this.showCourse = false
     this.showTeacher = false
+    this.showRestriction=false
+    this.showPriority=false
+  }
+
+  changeRestriction() {
+    this.showSchedule = false
+    this.showClasses = false
+    this.showArea = false
+    this.showCourse = false
+    this.showTeacher = false
+    this.showRestriction=true
+    this.showPriority=false
+  }
+  changePriority() {
+    this.showSchedule = false
+    this.showClasses = false
+    this.showArea = false
+    this.showCourse = false
+    this.showTeacher = false
+    this.showRestriction=false
+    this.showPriority=true
   }
 
   ngOnInit(): void {

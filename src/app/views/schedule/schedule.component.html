@@ -14,9 +14,9 @@
           class="pe-3">school</app-icon>Clases</button>
         <button class="btn btn-primary  d-flex align-items-center" (click)="changeCourse()">
           <app-icon class="pe-3">book</app-icon>Cursos</button>
-          <button class="btn btn-primary  d-flex align-items-center" (click)="changeSchedule()">
+          <button class="btn btn-primary  d-flex align-items-center" (click)="changeRestriction()">
             <app-icon class="pe-3">block</app-icon>Restricciones</button>
-            <button class="btn btn-primary  d-flex align-items-center" (click)="changeSchedule()">
+            <button class="btn btn-primary  d-flex align-items-center" (click)="changePriority()">
               <app-icon class="pe-3">priority_high</app-icon>Prioridades</button>
           <button class="btn btn-primary  d-flex align-items-center" (click)="changeSchedule()">
             <app-icon class="pe-3">calendar_view_month</app-icon>Horario</button>
@@ -86,6 +86,12 @@
       </ng-container>
       <ng-container *ngIf="showCourse">
         <app-courses [courses]="schedule.courses" [showSide]="false"></app-courses>
+      </ng-container>
+      <ng-container *ngIf="showPriority">
+        <app-priorities [courses]="schedule.priority_criterias" [showSide]="false"></app-priorities>
+      </ng-container>
+      <ng-container *ngIf="showRestriction">
+        <app-restrictions [courses]="schedule.restrictions" [showSide]="false"></app-restrictions>
       </ng-container>
     </div>
   </div>

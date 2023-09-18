@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
 import { Area } from 'src/app/data/area';
 import { AreaService } from 'src/app/services/areas.service';
@@ -17,7 +18,7 @@ export class AreasComponent implements OnInit {
   @Input() showSide = true
 
   selectedAreas:Area[]=[]
-  showConfig=true;
+  showConfig=false;
 
   constructor(private areaService: AreaService,
     private toast: ToasterService) {
@@ -51,5 +52,18 @@ export class AreasComponent implements OnInit {
         this.toast.show({ message: 'Error', type: ToasterEnum.ERROR })
       },
     })
+  }
+
+  drop(event: CdkDragDrop<Area[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
   }
 }
